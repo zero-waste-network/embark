@@ -41,6 +41,7 @@
     "init": "init",
     "initiated": "initiated",
     "servicePortOnProxy": 10,
+    "nodeAccounts": "nodeAccounts",
     "networkIds": {
       "livenet": 1,
       "testnet": 3,

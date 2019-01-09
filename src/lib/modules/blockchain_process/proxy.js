@@ -18,11 +18,32 @@ const ethUtil = require('ethereumjs-util');
 
 const METHODS_TO_MODIFY = {accounts: 'eth_accounts'};
 
+function flattenDown (array, result) {
+  for (var i = 0; i < array.length; i++) {
+    var value = array[i];
+
+    if (Array.isArray(value)) {
+      flattenDown(value, result);
+    } else {
+      result.push(value);
+    }
+  }
+
+  return result;
+}
+
 const modifyPayload = (toModifyPayloads, body, accounts) => {
+  const nodeAccountsIndex = accounts.indexOf(constants.blockchain.nodeAccounts);
+  let finalAccounts = Object.assign([], accounts);
   switch (toModifyPayloads[body.id]) {
     case METHODS_TO_MODIFY.accounts:
       delete toModifyPayloads[body.id];
-      body.result = Array.isArray(body.result) && body.result.concat(accounts);
+      if (nodeAccountsIndex > -1) {
+        finalAccounts[nodeAccountsIndex] = body.result;
+        finalAccounts = flattenDown(finalAccounts, []);
+      }
+
+      body.result = finalAccounts;
       break;
     default:
   }

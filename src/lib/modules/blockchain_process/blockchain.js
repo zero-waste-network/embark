@@ -150,7 +150,13 @@ Blockchain.prototype.setupProxy = async function () {
   const AccountParser = require('../../utils/accountParser');
   if (!this.proxyIpc) this.proxyIpc = new Ipc({ipcRole: 'client'});
 
-  const addresses = AccountParser.parseAccountsConfig(this.userConfig.accounts, false, this.logger);
+  const addresses = AccountParser.parseAccountsConfig(this.userConfig.accounts, false, this.logger, [constants.blockchain.nodeAccounts])
+    .map(addr => {
+      if (typeof addr === 'object') {
+        return addr.address;
+      }
+      return addr;
+    });
 
   let wsProxy;
   if (this.config.wsRPC) {
