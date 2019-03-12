@@ -1,0 +1,50 @@
+{
+  "name": "embark-create-react-dapp-template",
+  "version": "4.0.0-beta.0",
+  "description": "Basic DApp template for Embark that uses create-react-app as a frontend build tool",
+  "homepage": "https://github.com/embark-framework/embark/tree/master/dapps/templates/embark-create-react-dapp#readme",
+  "bugs": "https://github.com/embark-framework/embark/issues",
+  "files": [
+    "src",
+    "embarkConfig/*.js",
+    "embarkConfig/development",
+    "embarkConfig/privatenet",
+    "embarkConfig/testnet",
+    "contracts",
+    "dot.gitignore",
+    "embark.json",
+    "test"
+  ],
+  "dependencies": {
+    "@babel/runtime-corejs2": "^7.3.1",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
+    "react-scripts": "2.1.5",
+    "embarkjs-connector-web3": "4.0.0-beta.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "ci": "npm run qa",
+    "clean": "npm run reset",
+    "package": "npm pack",
+    "qa": "npm-run-all test package",
+    "reset": "npx embark-reset && npx rimraf embark-*.tgz package"
+  },
+  "repository": {
+    "directory": "dapps/templates/embark-create-react-dapp",
+    "type": "git",
+    "url": "https://github.com/embark-framework/embark.git"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
