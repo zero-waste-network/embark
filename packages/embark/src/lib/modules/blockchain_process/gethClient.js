@@ -73,6 +73,10 @@ class GethClient {
       cmd.push("--syncmode=" + config.syncMode);
     }
 
+    if(this.isTestNetwork(config)) {
+      cmd.push("--gcmode=archive");
+    }
+
     if (config.account && config.account.password) {
       const resolvedPath = path.resolve(fs.dappPath(), config.account.password);
       cmd.push(`--password=${resolvedPath}`);
@@ -133,6 +137,11 @@ class GethClient {
       cmd = "--networkid=" + config.networkId;
     }
     return cmd;
+  }
+
+  isTestNetwork(config) {
+    return ['testnet', 'rinkeby'].includes(config.networkType) ||
+      ![1, 8, 100].includes(config.networkId);
   }
 
   initGenesisCommmand() {
