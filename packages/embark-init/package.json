@@ -1,0 +1,28 @@
+{
+  "name": "embark-init",
+  "version": "4.0.0",
+  "author": "Iuri Matias <iuri.matias@gmail.com>",
+  "contributors": [],
+  "description": "DApp init utlity for Embark",
+  "homepage": "https://github.com/embark-framework/embark/tree/master/packages/embark-init#readme",
+  "bugs": "https://github.com/embark-framework/embark/issues",
+  "license": "MIT",
+  "repository": {
+    "directory": "packages/embark-init",
+    "type": "git",
+    "url": "https://github.com/embark-framework/embark.git"
+  },
+  "bin": "./bin.js",
+  "main": "index.js",
+  "files": [
+    "bin.js"
+  ],
+  "dependencies": {
+    "fs-extra": "7.0.1"
+  },
+  "engines": {
+    "node": ">=8.12.0",
+    "npm": ">=6.4.1",
+    "yarn": ">=1.12.3"
+  }
+}

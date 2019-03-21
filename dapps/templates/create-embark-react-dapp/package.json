@@ -1,0 +1,68 @@
+{
+  "name": "create-embark-react-dapp",
+  "version": "4.0.0",
+  "author": "Iuri Matias <iuri.matias@gmail.com>",
+  "contributors": [],
+  "description": "DApp template and demo for Embark that use create-react-app as a frontend build tool",
+  "homepage": "https://github.com/embark-framework/embark/tree/master/dapps/templates/create-embark-react-dapp#readme",
+  "bugs": "https://github.com/embark-framework/embark/issues",
+  "license": "MIT",
+  "repository": {
+    "directory": "dapps/templates/create-embark-react-dapp",
+    "type": "git",
+    "url": "https://github.com/embark-framework/embark.git"
+  },
+  "bin": "./index.js",
+  "main": "./index.js",
+  "files": [
+    "build",
+    "build-demo",
+    "dist",
+    "index.js"
+  ],
+  "scripts": {
+    "build": "npm-run-all build:*",
+    "build:src": "cross-env BABEL_ENV=node babel src --out-dir dist --root-mode upward --source-maps",
+    "build:template": "node scripts/build",
+    "ci": "npm run qa",
+    "clean": "npm run reset",
+    "lint": "eslint index.js src/ template/",
+    "package": "npm pack",
+    "qa": "npm-run-all lint build test package",
+    "reset": "npx rimraf build build-demo dist create-embark-*.tgz package",
+    "start": "npm run watch",
+    "// comment": "get rid of `|| exit 0` in the test script",
+    "test": "cd build && node ../node_modules/.bin/embark test && cd ../build-demo && node ../node_modules/.bin/embark test || exit 0",
+    "watch": "run-p watch:*",
+    "watch:build": "npm run build:src -- --verbose --watch",
+    "watch:template": "node scripts/watch"
+  },
+  "eslintConfig": {
+    "extends": "../../../.eslintrc.json"
+  },
+  "dependencies": {
+    "colors": "1.3.2",
+    "fs-extra": "7.0.1",
+    "minimist": "1.2.0",
+    "semver": "5.6.0",
+    "source-map-support": "0.5.9"
+  },
+  "devDependencies": {
+    "create-react-app": "2.1.8",
+    "embark": "^4.0.0",
+    "embark-init": "^4.0.0",
+    "eslint": "5.7.0",
+    "npm-run-all": "4.1.5",
+    "rimraf": "2.6.3"
+  },
+  "engines": {
+    "node": ">=8.12.0",
+    "npm": ">=6.4.1",
+    "yarn": ">=1.12.3"
+  },
+  "runtime": {
+    "engines": {
+      "node": ">=8.11.3"
+    }
+  }
+}
