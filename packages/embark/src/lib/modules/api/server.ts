@@ -101,17 +101,23 @@ export default class Server {
 
     this.embark.events.on("plugins:register:api", (callDescription: CallDescription) => this.registerCallDescription(instance, callDescription));
 
+    let buildDir = "";
     let ui: express.RequestHandler;
     if (process.env.EMBARK_DEVELOPMENT) {
       ui = proxy("http://localhost:3000");
     } else {
-      ui = express.static(
-        findUp.sync("node_modules/embark-ui/build", {cwd: embarkPath()}) ||
-          embarkPath("node_modules/embark-ui/build"),
-      );
+      buildDir = findUp.sync("node_modules/embark-ui/build", {cwd: embarkPath()}) ||
+        embarkPath("node_modules/embark-ui/build");
+      ui = express.static(buildDir);
     }
 
     instance.app.use("/", ui);
+
+    if (buildDir) {
+      instance.app.get("/*", (_req, res) => {
+        res.sendFile(path.join(buildDir, "index.html"));
+      });
+    }
 
     return instance;
   }
