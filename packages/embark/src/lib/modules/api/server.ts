@@ -199,6 +199,8 @@ export default class Server {
                 or<br />
                 <code>cd ${path.join(monorepoRootDir, "packages/embark-ui")}
                   && yarn start</code></p>
+              <p>to instead use a static build from the monorepo, restart embark
+                with: <code>EMBARK_UI_STATIC=t embark run</code></p>
             ` : ""}
             <p>this page will automatically reload
                <span id="time-left">
