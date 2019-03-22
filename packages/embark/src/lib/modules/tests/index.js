@@ -105,6 +105,16 @@ class TestRunner {
       if (err) {
         return cb(err);
       }
+      self.fs.remove('.embark/contracts', (err) => {
+        if(err) {
+          console.error(__("Error deleting compiled contracts from .embark"), err);
+        }
+      });
+      self.fs.remove('.embark/remix_tests.sol', (err) => {
+        if(err) {
+          console.error(__("Error deleting '.embark/remix_tests.sol'"), err);
+        }
+      });
       let totalFailures = results.reduce((acc, result) => acc + result.failures, 0);
       if (totalFailures) {
         return cb(` > Total number of failures: ${totalFailures}`.red.bold);
@@ -228,9 +238,7 @@ class TestRunner {
         return cb(err);
       }
       let failures = runs.reduce((acc, val) => acc + val, 0);
-      self.fs.remove('.embark/contracts', (_err) => {
-        cb(null, {failures});
-      });
+      cb(null, {failures});
     });
   }
 
